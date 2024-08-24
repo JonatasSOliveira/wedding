@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-blue-200">
+    <>
       <header className="relative w-full max-w-md bg-blue-300 ">
         <div className="bg-blue-200 h-10" />
         <div className="relative text-center text-white">
@@ -42,6 +42,6 @@ export default function HomePage() {
           </a>
         </div>
       </main >
-    </div >
+    </>
   );
 }
