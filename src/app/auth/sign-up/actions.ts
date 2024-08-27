@@ -5,7 +5,7 @@ import { AuthSignUpFormData } from './form-schema'
 import { setSession } from '@/lib/auth'
 
 export async function signUp(signUpData: AuthSignUpFormData): Promise<void> {
-    const authService = new AuthService(new FirebaseAuthAdapter())
-    const loggedUser = await authService.signUp(signUpData);
-    await setSession(loggedUser);
+  const authService = new AuthService(new FirebaseAuthAdapter())
+  const loggedUser = await authService.signUp(signUpData)
+  await setSession(loggedUser)
 }
