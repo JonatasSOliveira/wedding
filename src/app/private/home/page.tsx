@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import { productPageDefinition } from "../products/page-definition";
+import React from 'react'
+import Link from 'next/link'
+import { productPageDefinition } from '../products/page-definition'
 
 export default function HomePage() {
   return (
@@ -12,5 +12,5 @@ export default function HomePage() {
         {productPageDefinition.title}
       </Link>
     </div>
-  );
+  )
 }

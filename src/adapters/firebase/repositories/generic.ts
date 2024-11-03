@@ -3,16 +3,16 @@ import {
   Timestamp,
   addDoc,
   collection,
-} from "firebase/firestore";
+} from 'firebase/firestore'
 
-import { AuthenticatedUserResponseDTO } from "@/domain/dtos/auth/response/authenticated_user";
-import { firebaseFirestore } from "@/infra/firebase";
+import { AuthenticatedUserResponseDTO } from '@/domain/dtos/auth/response/authenticated_user'
+import { firebaseFirestore } from '@/infra/firebase'
 
 export abstract class GenericFirebaseRepository<CreateDTO> {
-  protected readonly col: CollectionReference;
+  protected readonly col: CollectionReference
 
   constructor(protected readonly collectionName: string) {
-    this.col = collection(firebaseFirestore, this.collectionName);
+    this.col = collection(firebaseFirestore, this.collectionName)
   }
 
   public async create(
@@ -25,6 +25,6 @@ export abstract class GenericFirebaseRepository<CreateDTO> {
       created_at: Timestamp.now(),
       updated_at: Timestamp.now(),
       deleted_at: null,
-    });
+    })
   }
 }

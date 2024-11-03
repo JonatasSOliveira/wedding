@@ -1,27 +1,27 @@
-"use client";
+'use client'
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { AuthSignUpFormData, authSignUpFormSchema } from "./form-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signUp } from "./actions";
+import React from 'react'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { AuthSignUpFormData, authSignUpFormSchema } from './form-schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { signUp } from './actions'
 
 export default function SignUpForm() {
-  const router = useRouter();
+  const router = useRouter()
   const { register, handleSubmit } = useForm<AuthSignUpFormData>({
-    mode: "onSubmit",
+    mode: 'onSubmit',
     resolver: zodResolver(authSignUpFormSchema),
-  });
+  })
 
-  const goBack = () => router.back();
+  const goBack = () => router.back()
 
   const formAction: () => void = handleSubmit(
     async (data: AuthSignUpFormData) => {
-      await signUp(data);
+      await signUp(data)
       // router.push(homePageDefinition.path)
     },
-  );
+  )
 
   return (
     <form
@@ -37,7 +37,7 @@ export default function SignUpForm() {
         </label>
         <input
           className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          {...register("email")}
+          {...register('email')}
           type="email"
           name="email"
           id="email"
@@ -52,7 +52,7 @@ export default function SignUpForm() {
         </label>
         <input
           className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          {...register("password")}
+          {...register('password')}
           type="password"
           name="password"
           id="password"
@@ -67,7 +67,7 @@ export default function SignUpForm() {
         </label>
         <input
           className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          {...register("confirm_password")}
+          {...register('confirm_password')}
           type="password"
           name="confirm_password"
           id="confirm_password"
@@ -89,5 +89,5 @@ export default function SignUpForm() {
         </button>
       </div>
     </form>
-  );
+  )
 }

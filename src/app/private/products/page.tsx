@@ -1,7 +1,7 @@
-import Link from "next/link";
-import React from "react";
-import { newProductDefinition } from "./new/page-definition";
-import { productPageDefinition } from "./page-definition";
+import Link from 'next/link'
+import React from 'react'
+import { newProductDefinition } from './new/page-definition'
+import { productPageDefinition } from './page-definition'
 
 export default function Products() {
   return (
@@ -14,5 +14,5 @@ export default function Products() {
         {newProductDefinition.title}
       </Link>
     </>
-  );
+  )
 }

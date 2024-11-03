@@ -1,6 +1,6 @@
-import React from "react";
-import SignInForm from "./form";
+import React from 'react'
+import SignInForm from './form'
 
 export default function SignInPage() {
-  return <SignInForm />;
+  return <SignInForm />
 }

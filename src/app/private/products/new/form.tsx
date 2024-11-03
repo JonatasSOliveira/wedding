@@ -1,57 +1,56 @@
-"use client";
+'use client'
 
 import {
   ProductDisponibility,
   productDisponibilityLabels,
-} from "@/domain/dtos/product/request/create";
-import { ProductFormSchema, productFormSchema } from "./form-schema";
-import React, { useState } from "react";
+} from '@/domain/dtos/product/request/create'
+import { ProductFormSchema, productFormSchema } from './form-schema'
+import React, { useState } from 'react'
 
-import Input from "@/ui/components/input";
-import { createProduct } from "./action";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
+import Input from '@/ui/components/input'
+import { createProduct } from './action'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export default function NewProductForm() {
-  const router = useRouter();
+  const router = useRouter()
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    watch,
   } = useForm<ProductFormSchema>({
-    mode: "onSubmit",
+    mode: 'onSubmit',
     resolver: zodResolver(productFormSchema),
-  });
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  })
+  const [imageUrls, setImageUrls] = useState<string[]>([])
 
-  const goBack = () => router.back();
+  const goBack = () => router.back()
 
   const addImageUrl = () => {
-    setImageUrls([...imageUrls, ""]);
-  };
+    setImageUrls([...imageUrls, ''])
+  }
 
   const handleImageUrlChange = (index: number, value: string) => {
-    const newImageUrls = [...imageUrls];
-    newImageUrls[index] = value;
-    setImageUrls(newImageUrls);
-    setValue("imgs_urls", newImageUrls);
-  };
+    const newImageUrls = [...imageUrls]
+    newImageUrls[index] = value
+    setImageUrls(newImageUrls)
+    setValue('imgs_urls', newImageUrls)
+  }
 
   const removeImageUrl = (index: number) => {
-    const newImageUrls = imageUrls.filter((_, i) => i !== index);
-    setImageUrls(newImageUrls);
-    setValue("imgs_urls", newImageUrls);
-  };
+    const newImageUrls = imageUrls.filter((_, i) => i !== index)
+    setImageUrls(newImageUrls)
+    setValue('imgs_urls', newImageUrls)
+  }
 
   const formAction: () => void = handleSubmit(
     async (data: ProductFormSchema) => {
-      await createProduct(data);
-      goBack();
+      await createProduct(data)
+      goBack()
     },
-  );
+  )
 
   return (
     <form
@@ -61,24 +60,24 @@ export default function NewProductForm() {
       <div className="mb-4 h-[90%] overflow-y-auto">
         <Input
           label="Nome"
-          {...register("name")}
+          {...register('name')}
           error={errors.name?.message}
         />
         <Input
           label="Descrição"
-          {...register("description")}
+          {...register('description')}
           error={errors.description?.message}
         />
         <Input
           label="Preço Mínimo"
           type="number"
-          {...register("min_price")}
+          {...register('min_price')}
           error={errors.min_price?.message}
         />
         <Input
           label="Preço Máximo"
           type="number"
-          {...register("max_price")}
+          {...register('max_price')}
           error={errors.max_price?.message}
         />
         <div className="mb-4">
@@ -88,12 +87,12 @@ export default function NewProductForm() {
               <div key={disponibility} className="flex flex-row">
                 <input
                   type="radio"
-                  id={"disponibility-" + disponibility}
+                  id={'disponibility-' + disponibility}
                   value={disponibility}
-                  {...register("disponibility")}
+                  {...register('disponibility')}
                 />
                 <label
-                  htmlFor={"disponibility-" + disponibility}
+                  htmlFor={'disponibility-' + disponibility}
                   className="ml-2 text-sm"
                 >
                   {productDisponibilityLabels[disponibility]}
@@ -116,7 +115,7 @@ export default function NewProductForm() {
                 placeholder="URL da imagem"
                 value={url}
                 onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                className={`rounded border p-2 ${errors.imgs_urls ? "border-red-500" : ""}`}
+                className={`rounded border p-2 ${errors.imgs_urls ? 'border-red-500' : ''}`}
               />
               <button
                 type="button"
@@ -153,5 +152,5 @@ export default function NewProductForm() {
         </button>
       </div>
     </form>
-  );
+  )
 }
