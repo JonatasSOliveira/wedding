@@ -1,4 +1,4 @@
-import { ProductDisponibility } from '@/domain/dtos/product/request/create'
+import { ProductDisponibility } from '@/domain/models/product'
 import { z } from 'zod'
 
 export const productFormSchema = z

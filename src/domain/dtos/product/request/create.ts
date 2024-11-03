@@ -1,18 +1,7 @@
-export enum ProductDisponibility {
-  BEST_MAN = 'BEST_MAN',
-  GUEST = 'GUEST',
-}
+import { ProductModel } from '@/domain/models/product'
 
-export const productDisponibilityLabels = {
-  [ProductDisponibility.BEST_MAN]: 'Padrinho',
-  [ProductDisponibility.GUEST]: 'Convidado',
-} as const
-
-export interface CreateProductDTO {
-  name: string
-  description?: string
-  min_price: number
-  max_price: number
-  imgs_urls?: string[]
-  disponibility: ProductDisponibility
-}
+export interface CreateProductDTO
+  extends Pick<
+    ProductModel,
+    'description' | 'min_price' | 'max_price' | 'imgs_urls' | 'disponibility'
+  > {}

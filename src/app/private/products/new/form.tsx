@@ -1,9 +1,5 @@
 'use client'
 
-import {
-  ProductDisponibility,
-  productDisponibilityLabels,
-} from '@/domain/dtos/product/request/create'
 import { ProductFormSchema, productFormSchema } from './form-schema'
 import React, { useState } from 'react'
 
@@ -12,6 +8,10 @@ import { createProduct } from './action'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  ProductDisponibility,
+  productDisponibilityLabels,
+} from '@/domain/models/product'
 
 export default function NewProductForm() {
   const router = useRouter()

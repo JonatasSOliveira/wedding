@@ -10,6 +10,5 @@ export async function createProduct(
 ): Promise<void> {
   const session = await getSession()
   const productService = new ProductService(new FirebaseProductAdapter())
-  console.log(productData)
   productService.create({ ...productData }, session)
 }

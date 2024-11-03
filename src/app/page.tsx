@@ -1,4 +1,7 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { guestProductListDefinition } from './product-lists/guest/page-definition'
+import { bestManProductListDefinition } from './product-lists/best-man/page-definition'
 
 export default function HomePage() {
   return (
@@ -28,18 +31,18 @@ export default function HomePage() {
 
       <main className="w-full max-w-md flex-1 rounded-b-lg bg-white p-6 text-center shadow-lg">
         <div className="space-y-4">
-          <a
-            href="#"
+          <Link
+            href={guestProductListDefinition.path}
             className="block w-full rounded-lg bg-pink-300 py-4 text-lg font-semibold text-black transition duration-300 hover:bg-pink-400"
           >
             Lista de Presentes - Convidados
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            href={bestManProductListDefinition.path}
             className="block w-full rounded-lg bg-pink-300 py-4 text-lg font-semibold text-black transition duration-300 hover:bg-pink-400"
           >
             Lista de Presentes - Padrinhos
-          </a>
+          </Link>
         </div>
       </main>
     </>
