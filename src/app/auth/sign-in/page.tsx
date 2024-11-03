@@ -1,5 +1,6 @@
 import React from 'react'
+import SignInForm from './form'
 
 export default function SignInPage() {
-    return <div>SignInPage</div>
+    return <SignInForm />
 }
