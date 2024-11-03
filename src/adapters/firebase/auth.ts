@@ -1,12 +1,12 @@
-import { SignInRequestDTO } from '@/domain/dtos/auth/request/sign-in'
-import { SignUpRequestDTO } from '@/domain/dtos/auth/request/sign-up'
-import { AuthenticatedUserResponseDTO } from '@/domain/dtos/auth/response/authenticated_user'
-import { AuthPort } from '@/domain/ports/auth'
-import { firebaseAuth } from '@/infra/firebase'
+import { SignInRequestDTO } from "@/domain/dtos/auth/request/sign-in";
+import { SignUpRequestDTO } from "@/domain/dtos/auth/request/sign-up";
+import { AuthenticatedUserResponseDTO } from "@/domain/dtos/auth/response/authenticated_user";
+import { AuthPort } from "@/domain/ports/auth";
+import { firebaseAuth } from "@/infra/firebase";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-} from 'firebase/auth'
+} from "firebase/auth";
 
 export class FirebaseAuthAdapter implements AuthPort {
   public async signIn({
@@ -18,15 +18,15 @@ export class FirebaseAuthAdapter implements AuthPort {
         firebaseAuth,
         email,
         password,
-      )
+      );
       const authenticatedUser: AuthenticatedUserResponseDTO = {
         id: response.user.uid,
         email: response.user.email as string,
-      }
-      return authenticatedUser
+      };
+      return authenticatedUser;
     } catch (error) {
-      console.log(error)
-      throw error
+      console.log(error);
+      throw error;
     }
   }
 
@@ -39,15 +39,15 @@ export class FirebaseAuthAdapter implements AuthPort {
         firebaseAuth,
         email,
         password,
-      )
+      );
       const authenticatedUser: AuthenticatedUserResponseDTO = {
         id: response.user.uid,
         email: response.user.email as string,
-      }
-      return authenticatedUser
+      };
+      return authenticatedUser;
     } catch (error) {
-      console.log(error)
-      throw error
+      console.log(error);
+      throw error;
     }
   }
 }

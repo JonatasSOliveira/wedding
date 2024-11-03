@@ -3,6 +3,6 @@ import { GenericFirebaseRepository } from "./generic";
 
 export class ProductRepository extends GenericFirebaseRepository<CreateProductDTO> {
   constructor() {
-    super("products")
+    super("products");
   }
 }

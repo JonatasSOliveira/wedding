@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const authSignUpFormSchema = z
   .object({
@@ -9,11 +9,11 @@ export const authSignUpFormSchema = z
   .superRefine(({ confirm_password: confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
       ctx.addIssue({
-        code: 'custom',
-        message: 'The passwords did not match',
-        path: ['confirmPassword'],
-      })
+        code: "custom",
+        message: "The passwords did not match",
+        path: ["confirmPassword"],
+      });
     }
-  })
+  });
 
-export type AuthSignUpFormData = z.infer<typeof authSignUpFormSchema>
+export type AuthSignUpFormData = z.infer<typeof authSignUpFormSchema>;

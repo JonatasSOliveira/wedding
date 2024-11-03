@@ -1,5 +1,5 @@
 export interface SignUpRequestDTO {
-  email: string
-  password: string
-  confirm_password: string
+  email: string;
+  password: string;
+  confirm_password: string;
 }

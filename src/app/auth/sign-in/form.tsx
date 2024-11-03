@@ -1,29 +1,29 @@
-'use client'
+"use client";
 
-import { AuthSignUpFormData, authSignUpFormSchema } from './form-schema'
+import { AuthSignUpFormData, authSignUpFormSchema } from "./form-schema";
 
-import React from 'react'
-import { homePageDefinition } from '@/app/private/home/page-definition'
-import { signIn } from './actions'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { zodResolver } from '@hookform/resolvers/zod'
+import React from "react";
+import { homePageDefinition } from "@/app/private/home/page-definition";
+import { signIn } from "./actions";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function SignInForm() {
-  const router = useRouter()
+  const router = useRouter();
   const { register, handleSubmit } = useForm<AuthSignUpFormData>({
-    mode: 'onSubmit',
+    mode: "onSubmit",
     resolver: zodResolver(authSignUpFormSchema),
-  })
+  });
 
-  const goBack = () => router.back()
+  const goBack = () => router.back();
 
   const formAction: () => void = handleSubmit(
     async (data: AuthSignUpFormData) => {
-      await signIn(data)
-      router.push(homePageDefinition.path)
+      await signIn(data);
+      router.push(homePageDefinition.path);
     },
-  )
+  );
 
   return (
     <form
@@ -39,7 +39,7 @@ export default function SignInForm() {
         </label>
         <input
           className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          {...register('email')}
+          {...register("email")}
           type="email"
           name="email"
           id="email"
@@ -54,7 +54,7 @@ export default function SignInForm() {
         </label>
         <input
           className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          {...register('password')}
+          {...register("password")}
           type="password"
           name="password"
           id="password"
@@ -76,5 +76,5 @@ export default function SignInForm() {
         </button>
       </div>
     </form>
-  )
+  );
 }
