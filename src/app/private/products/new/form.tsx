@@ -3,15 +3,13 @@
 import { ProductFormSchema, productFormSchema } from './form-schema'
 import React, { useState } from 'react'
 
-import Input from '@/ui/components/input'
+import Input from '@/components/ui/input/input'
 import { createProduct } from './action'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  ProductDisponibility,
-  productDisponibilityLabels,
-} from '@/domain/models/product'
+import { GuestRole, guestRoleLabels } from '@/domain/enums/guest-type'
+import Form from '@/components/ui/form/form.'
 
 export default function NewProductForm() {
   const router = useRouter()
@@ -53,104 +51,80 @@ export default function NewProductForm() {
   )
 
   return (
-    <form
-      action={formAction}
-      className="my-auto flex h-[75vh] w-[90%] flex-col rounded bg-white px-8 pb-8 pt-6 shadow-md"
-    >
-      <div className="mb-4 h-[90%] overflow-y-auto">
-        <Input
-          label="Nome"
-          {...register('name')}
-          error={errors.name?.message}
-        />
-        <Input
-          label="Descrição"
-          {...register('description')}
-          error={errors.description?.message}
-        />
-        <Input
-          label="Preço Mínimo"
-          type="number"
-          {...register('min_price')}
-          error={errors.min_price?.message}
-        />
-        <Input
-          label="Preço Máximo"
-          type="number"
-          {...register('max_price')}
-          error={errors.max_price?.message}
-        />
-        <div className="mb-4">
-          <p className="text-sm font-bold text-gray-700">Disponível para:</p>
-          <div className="flex flex-row justify-between">
-            {Object.values(ProductDisponibility).map((disponibility) => (
-              <div key={disponibility} className="flex flex-row">
-                <input
-                  type="radio"
-                  id={'disponibility-' + disponibility}
-                  value={disponibility}
-                  {...register('disponibility')}
-                />
-                <label
-                  htmlFor={'disponibility-' + disponibility}
-                  className="ml-2 text-sm"
-                >
-                  {productDisponibilityLabels[disponibility]}
-                </label>
-              </div>
-            ))}
-          </div>
-          {errors.disponibility && (
-            <span className="text-sm text-red-500">
-              {errors.disponibility.message}
-            </span>
-          )}
-        </div>
-        <div className="mb-4">
-          <p className="text-sm font-bold text-gray-700">Imagens</p>
-          {imageUrls.map((url, index) => (
-            <div key={index} className="mb-2 flex items-center">
+    <Form formAction={formAction} goBack={goBack}>
+      <Input label="Nome" {...register('name')} error={errors.name?.message} />
+      <Input
+        label="Descrição"
+        {...register('description')}
+        error={errors.description?.message}
+      />
+      <Input
+        label="Preço Mínimo"
+        type="number"
+        {...register('min_price')}
+        error={errors.min_price?.message}
+      />
+      <Input
+        label="Preço Máximo"
+        type="number"
+        {...register('max_price')}
+        error={errors.max_price?.message}
+      />
+      <div className="mb-4">
+        <p className="text-sm font-bold text-gray-700">Disponível para:</p>
+        <div className="flex flex-row justify-between">
+          {Object.values(GuestRole).map((disponibility) => (
+            <div key={disponibility} className="flex flex-row">
               <input
-                type="url"
-                placeholder="URL da imagem"
-                value={url}
-                onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                className={`rounded border p-2 ${errors.imgs_urls ? 'border-red-500' : ''}`}
+                type="radio"
+                id={'disponibility-' + disponibility}
+                value={disponibility}
+                {...register('disponibility')}
               />
-              <button
-                type="button"
-                onClick={() => removeImageUrl(index)}
-                className="ml-2 text-red-500"
+              <label
+                htmlFor={'disponibility-' + disponibility}
+                className="ml-2 text-sm"
               >
-                X
-              </button>
+                {guestRoleLabels[disponibility]}
+              </label>
             </div>
           ))}
-          <button type="button" onClick={addImageUrl} className="text-blue-500">
-            Adicionar URL de Imagem
-          </button>
-          {errors.imgs_urls && (
-            <span className="text-sm text-red-500">
-              {errors.imgs_urls.message}
-            </span>
-          )}
         </div>
+        {errors.disponibility && (
+          <span className="text-sm text-red-500">
+            {errors.disponibility.message}
+          </span>
+        )}
       </div>
-      <div className="flex flex-row justify-around gap-2">
-        <button
-          className="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-          type="button"
-          onClick={goBack}
-        >
-          Cancelar
+      <div className="mb-4">
+        <p className="text-sm font-bold text-gray-700">Imagens</p>
+        {imageUrls.map((url, index) => (
+          <div key={index} className="mb-2 flex items-center">
+            <input
+              type="url"
+              placeholder="URL da imagem"
+              value={url}
+              onChange={(e) => handleImageUrlChange(index, e.target.value)}
+              className={`rounded border p-2 ${errors.imgs_urls ? 'border-red-500' : ''}`}
+            />
+            <button
+              type="button"
+              onClick={() => removeImageUrl(index)}
+              className="ml-2 text-red-500"
+            >
+              X
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={addImageUrl} className="text-blue-500">
+          Adicionar URL de Imagem
         </button>
-        <button
-          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-          type="submit"
-        >
-          Salvar
-        </button>
+        {errors.imgs_urls && (
+          <span className="text-sm text-red-500">
+            {errors.imgs_urls.message}
+          </span>
+        )}
       </div>
-    </form>
+    </Form>
   )
 }

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { guestProductListDefinition } from './product-lists/guest/page-definition'
-import { bestManProductListDefinition } from './product-lists/best-man/page-definition'
+import { bestManProductListDefinition } from './product-lists/groomsman/page-definition'
 
 export default function HomePage() {
   return (

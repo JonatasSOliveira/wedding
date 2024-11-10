@@ -4,12 +4,11 @@ import { newProductDefinition } from './new/page-definition'
 import { productPageDefinition } from './page-definition'
 import { ProductService } from '@/application/services/product'
 import { FirebaseProductAdapter } from '@/adapters/firebase/product'
-import { getSession } from '@/lib/auth'
 
 const productService = new ProductService(new FirebaseProductAdapter())
 
 export default async function Products() {
-  const products = await productService.list(await getSession())
+  const products = await productService.list()
 
   return (
     <div className="my-auto flex h-[90vh] w-[90%] flex-col rounded bg-white p-4">

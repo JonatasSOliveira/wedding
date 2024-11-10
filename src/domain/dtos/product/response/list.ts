@@ -1,9 +1,3 @@
-export interface ListProductDTO {
-  id: string
-  name: string
-  description: string
-  min_price: number
-  max_price: number
-  imgs_urls: string[]
-  disponibility: string
-}
+import { ProductModel } from '@/domain/models/product'
+
+export interface ListProductDTO extends ProductModel {}

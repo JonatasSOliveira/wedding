@@ -1,4 +1,4 @@
-import { ProductDisponibility } from '@/domain/models/product'
+import { GuestRole } from '@/domain/enums/guest-type'
 import { z } from 'zod'
 
 export const productFormSchema = z
@@ -22,7 +22,7 @@ export const productFormSchema = z
     imgs_urls: z
       .array(z.string().url({ message: 'Cada URL deve ser um link válido' }))
       .optional(),
-    disponibility: z.nativeEnum(ProductDisponibility, {
+    disponibility: z.nativeEnum(GuestRole, {
       message: 'Escolha uma opção válida',
     }),
   })

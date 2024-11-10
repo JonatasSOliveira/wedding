@@ -57,13 +57,14 @@ export abstract class GenericFirebaseRepository<
   }
 
   public async list(
-    userId: string,
     modelQuery?: ModelQuery<Model>,
+    userId?: string,
   ): Promise<ListDTO[]> {
-    const conditions = [
-      where('user_id', '==', userId),
-      where('deleted_at', '==', null),
-    ]
+    const conditions = [where('deleted_at', '==', null)]
+
+    if (userId) {
+      conditions.push(where('user_id', '==', userId))
+    }
 
     if (modelQuery) {
       for (const [key, value] of Object.entries(modelQuery)) {

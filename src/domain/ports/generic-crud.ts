@@ -9,7 +9,7 @@ export interface GenericCrudPort<CreateDTO, ListDTO, Model extends BaseModel> {
   ): Promise<void>
 
   list(
-    user: AuthenticatedUserResponseDTO,
     query?: ModelQuery<Model>,
+    user?: AuthenticatedUserResponseDTO,
   ): Promise<ListDTO[]>
 }
