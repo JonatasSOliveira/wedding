@@ -23,6 +23,6 @@ export abstract class GenericService<
     query?: ModelQuery<Model> | undefined,
     user?: AuthenticatedUserResponseDTO,
   ): Promise<ListDTO[]> {
-    return this.adapter.list(query, user)
+    return await this.adapter.list(query, user)
   }
 }
