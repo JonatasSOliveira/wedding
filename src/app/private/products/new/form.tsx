@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { GuestRole, guestRoleLabels } from '@/domain/enums/guest-type'
-import Form from '@/components/ui/form/form.'
+import Form from '@/components/ui/form/form'
 
 export default function NewProductForm() {
   const router = useRouter()

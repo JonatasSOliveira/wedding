@@ -1,6 +1,6 @@
 'use client'
 
-import Form from '@/components/ui/form/form.'
+import Form from '@/components/ui/form/form'
 import React from 'react'
 import { guestFormSchema, GuestFormSchema } from './form-schema'
 import { createGuest } from './actions'
