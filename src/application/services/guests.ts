@@ -7,8 +7,8 @@ import { ReservationDTO } from '@/domain/dtos/guest/request/reserve'
 
 export class GuestService
   extends GenericService<CreateGuestDTO, ListGuestDTO, GuestModel>
-  implements GuestPort {
-
+  implements GuestPort
+{
   constructor(protected readonly adapter: GuestPort) {
     super(adapter)
   }
