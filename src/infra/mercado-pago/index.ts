@@ -9,6 +9,8 @@ export const initMercadoPagoClientSideSdk = () => {
   initMercadoPago(process.env.NEXT_PUBLIC_MERCADO_PAGO_KEY, { locale: 'pt-BR' })
 }
 
+console.log('Mercado Pago Iniciado', process.env.MERCADO_PAGO_ACCESS_TOKEN)
+
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN || '',
   options: { timeout: 5000, idempotencyKey: 'abc' },
