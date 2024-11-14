@@ -25,4 +25,11 @@ export abstract class GenericService<
   ): Promise<ListDTO[]> {
     return await this.adapter.list(query, user)
   }
+
+  public async get(
+    query?: ModelQuery<Model> | undefined,
+    user?: AuthenticatedUserResponseDTO,
+  ): Promise<ListDTO> {
+    return await this.adapter.get(query, user)
+  }
 }

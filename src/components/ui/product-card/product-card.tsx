@@ -2,15 +2,16 @@
 
 import React, { useState } from 'react'
 import { ListProductDTO } from '@/domain/dtos/product/response/list'
-import GuestReserveDialog from '@/components/dialogs/guest-reserve/guest-reserve'
+// import GuestReserveDialog from '@/components/dialogs/guest-reserve/guest-reserve'
 import { GuestRole } from '@/domain/enums/guest-type'
+import Link from 'next/link'
 
 interface ProductCardProps {
   product: ListProductDTO
   guestRole: GuestRole
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, guestRole }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [startX, setStartX] = useState<number | null>(null)
 
@@ -94,7 +95,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, guestRole }) => {
         </div>
 
         {/* Botão de Reservar */}
-        <GuestReserveDialog product={product} guestRole={guestRole} />
+        {/* <GuestReserveDialog product={product} guestRole={guestRole} /> */}
+        <Link
+          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          href={`/payment/${product.id}`}
+        >
+          Presentear
+        </Link>
       </div>
     </div>
   )

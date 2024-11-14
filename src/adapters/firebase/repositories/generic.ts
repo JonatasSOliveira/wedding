@@ -4,6 +4,8 @@ import {
   Timestamp,
   addDoc,
   collection,
+  doc,
+  getDoc,
   getDocs,
   query,
   where,
@@ -67,6 +69,14 @@ export abstract class GenericFirebaseRepository<
     }
 
     if (modelQuery) {
+      if (modelQuery.id) {
+        const docRef = doc(this.col, modelQuery.id)
+        const docData = this.convertDocToData(
+          (await getDoc(docRef)) as DocumentSnapshot,
+        )
+        return [docData]
+      }
+
       for (const [key, value] of Object.entries(modelQuery)) {
         conditions.push(where(key, '==', value))
       }
@@ -75,5 +85,16 @@ export abstract class GenericFirebaseRepository<
     const q = query(this.col, ...conditions)
     const querySnapshot = await getDocs(q)
     return querySnapshot.docs.map((doc) => this.convertDocToData(doc))
+  }
+
+  public async get(
+    modelQuery?: ModelQuery<Model>,
+    userId?: string,
+  ): Promise<ListDTO> {
+    const list = await this.list(modelQuery, userId)
+    if (list.length === 0) {
+      throw new Error('Document not found')
+    }
+    return list[0]
   }
 }
