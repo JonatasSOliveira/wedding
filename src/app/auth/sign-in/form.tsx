@@ -26,10 +26,7 @@ export default function SignInForm() {
   )
 
   return (
-    <form
-      action={formAction}
-      className="my-auto flex flex-col rounded bg-white px-8 pb-8 pt-6 shadow-md"
-    >
+    <form action={formAction}>
       <div className="mb-4">
         <label
           className="mb-2 block text-sm font-bold text-gray-700"

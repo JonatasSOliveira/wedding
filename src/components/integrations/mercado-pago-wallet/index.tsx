@@ -1,15 +1,17 @@
 'use client'
-import { initMercadoPagoClientSideSdk } from '@/infra/mercado-pago'
+import { MercadoPagoClientService } from '@/infra/mercado-pago'
 import { Wallet } from '@mercadopago/sdk-react'
 import React, { useEffect } from 'react'
 
-interface PaymentFormProps {
+interface MercadoPagoWalletProps {
   preferenceId: string
 }
 
-const PaymentForm: React.FC<PaymentFormProps> = ({ preferenceId }) => {
+const MercadoPagoWallet: React.FC<MercadoPagoWalletProps> = ({
+  preferenceId,
+}) => {
   useEffect(() => {
-    initMercadoPagoClientSideSdk()
+    MercadoPagoClientService.initSdk()
   }, [])
 
   return (
@@ -20,4 +22,4 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ preferenceId }) => {
   )
 }
 
-export default PaymentForm
+export default MercadoPagoWallet

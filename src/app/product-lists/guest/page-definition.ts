@@ -1,4 +1,4 @@
 export const guestProductListDefinition = {
   path: '/product-lists/guest',
-  title: 'Convidado',
+  title: 'Lista de Presentes - Convidados',
 } as const

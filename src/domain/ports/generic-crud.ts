@@ -17,4 +17,10 @@ export interface GenericCrudPort<CreateDTO, ListDTO, Model extends BaseModel> {
     query?: ModelQuery<Model>,
     user?: AuthenticatedUserResponseDTO,
   ): Promise<ListDTO>
+
+  update(
+    id: string,
+    updateDTO: CreateDTO,
+    user: AuthenticatedUserResponseDTO,
+  ): Promise<void>
 }

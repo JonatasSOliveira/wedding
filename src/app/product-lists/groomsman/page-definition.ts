@@ -1,4 +1,4 @@
-export const bestManProductListDefinition = {
+export const groomsmanProductListDefinition = {
   path: '/product-lists/groomsman',
-  title: 'Padrinhos',
+  title: 'Lista de Presentes - Padrinhos',
 } as const

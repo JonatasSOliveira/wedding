@@ -2,16 +2,20 @@
 
 import { ProductFormSchema, productFormSchema } from './form-schema'
 import React, { useState } from 'react'
-
 import Input from '@/components/ui/input/input'
-import { createProduct } from './action'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { GuestRole, guestRoleLabels } from '@/domain/enums/guest-type'
 import Form from '@/components/ui/form/form'
+import { ListProductDTO } from '@/domain/dtos/product/response/list'
 
-export default function NewProductForm() {
+interface PoductFormProps {
+  product?: ListProductDTO
+  action: (productData: ProductFormSchema) => Promise<void>
+}
+
+export const ProductForm: React.FC<PoductFormProps> = ({ action, product }) => {
   const router = useRouter()
   const {
     register,
@@ -21,6 +25,7 @@ export default function NewProductForm() {
   } = useForm<ProductFormSchema>({
     mode: 'onSubmit',
     resolver: zodResolver(productFormSchema),
+    defaultValues: product,
   })
   const [imageUrls, setImageUrls] = useState<string[]>([])
 
@@ -45,7 +50,7 @@ export default function NewProductForm() {
 
   const formAction: () => void = handleSubmit(
     async (data: ProductFormSchema) => {
-      await createProduct(data)
+      await action(data)
       goBack()
     },
   )

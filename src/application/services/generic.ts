@@ -32,4 +32,12 @@ export abstract class GenericService<
   ): Promise<ListDTO> {
     return await this.adapter.get(query, user)
   }
+
+  public async update(
+    id: string,
+    updateDTO: CreateDTO,
+    user: AuthenticatedUserResponseDTO,
+  ): Promise<void> {
+    await this.adapter.update(id, updateDTO, user)
+  }
 }

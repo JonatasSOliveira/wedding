@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { guestProductListDefinition } from './product-lists/guest/page-definition'
-import { bestManProductListDefinition } from './product-lists/groomsman/page-definition'
+import { groomsmanProductListDefinition } from './product-lists/groomsman/page-definition'
+import { signInPageDefinition } from './auth/sign-in/page-definition'
 
 export default function HomePage() {
   return (
@@ -35,16 +36,25 @@ export default function HomePage() {
             href={guestProductListDefinition.path}
             className="block w-full rounded-lg bg-pink-300 py-4 text-lg font-semibold text-black transition duration-300 hover:bg-pink-400"
           >
-            Lista de Presentes - Convidados
+            {guestProductListDefinition.title}
           </Link>
           <Link
-            href={bestManProductListDefinition.path}
+            href={groomsmanProductListDefinition.path}
             className="block w-full rounded-lg bg-pink-300 py-4 text-lg font-semibold text-black transition duration-300 hover:bg-pink-400"
           >
-            Lista de Presentes - Padrinhos
+            {groomsmanProductListDefinition.title}
           </Link>
         </div>
       </main>
+
+      <footer className="py-4">
+        <Link
+          href={signInPageDefinition.path}
+          className="font-bold text-blue-500"
+        >
+          Entrar
+        </Link>
+      </footer>
     </>
   )
 }

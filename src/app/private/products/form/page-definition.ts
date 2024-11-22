@@ -1,4 +1,4 @@
 export const newProductDefinition = {
-  path: '/private/products/new',
+  path: '/private/products/form',
   title: 'Novo Produto',
 } as const

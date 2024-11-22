@@ -8,6 +8,7 @@ import {
   getDoc,
   getDocs,
   query,
+  updateDoc,
   where,
 } from 'firebase/firestore'
 
@@ -96,5 +97,15 @@ export abstract class GenericFirebaseRepository<
       throw new Error('Document not found')
     }
     return list[0]
+  }
+
+  public async update(
+    id: string,
+    data: CreateDTO,
+    user: AuthenticatedUserResponseDTO,
+  ): Promise<void> {
+    const docRef = doc(this.col, id)
+    console.log(user)
+    await updateDoc(docRef, { ...data, updated_at: Timestamp.now() })
   }
 }

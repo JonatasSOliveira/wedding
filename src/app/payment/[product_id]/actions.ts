@@ -3,7 +3,7 @@
 import { FirebaseProductAdapter } from '@/adapters/firebase/product'
 import { ProductService } from '@/application/services/product'
 import { ListProductDTO } from '@/domain/dtos/product/response/list'
-import { preference } from '@/infra/mercado-pago'
+import { MercadoPagoService } from '@/infra/mercado-pago'
 
 export async function getProduct(productId: string): Promise<ListProductDTO> {
   const productService = new ProductService(new FirebaseProductAdapter())
@@ -14,7 +14,7 @@ export async function createPreference(
   product: ListProductDTO,
 ): Promise<string> {
   const initialProjectUrl = process.env.PROJECT_URl
-  const productPreference = await preference.create({
+  const productPreference = await MercadoPagoService.getPreference().create({
     body: {
       back_urls: {
         success: `${initialProjectUrl}/payment-return/success`,

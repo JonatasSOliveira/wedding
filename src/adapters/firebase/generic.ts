@@ -25,13 +25,21 @@ export abstract class FirebaseGenericAdapter<
     query?: ModelQuery<Model> | undefined,
     user?: AuthenticatedUserResponseDTO,
   ): Promise<ListDTO[]> {
-    return this.repository.list(query, user?.id)
+    return await this.repository.list(query, user?.id)
   }
 
   public async get(
     query?: ModelQuery<Model> | undefined,
     user?: AuthenticatedUserResponseDTO,
   ): Promise<ListDTO> {
-    return this.repository.get(query, user?.id)
+    return await this.repository.get(query, user?.id)
+  }
+
+  public async update(
+    id: string,
+    updateDTO: CreateDTO,
+    user: AuthenticatedUserResponseDTO,
+  ): Promise<void> {
+    await this.repository.update(id, updateDTO, user)
   }
 }
