@@ -1,4 +1,4 @@
 export const newGuestDefinition = {
-  path: '/private/guests/new',
+  path: '/private/guests/form',
   title: 'Novo Convidado',
 } as const

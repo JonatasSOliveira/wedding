@@ -3,14 +3,19 @@
 import Form from '@/components/ui/form/form'
 import React from 'react'
 import { guestFormSchema, GuestFormSchema } from './form-schema'
-import { createGuest } from './actions'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Input from '@/components/ui/input/input'
 import { GuestRole, guestRoleLabels } from '@/domain/enums/guest-type'
 import { useRouter } from 'next/navigation'
+import { ListGuestDTO } from '@/domain/dtos/guest/response/list'
 
-const NewGuestForm: React.FC = () => {
+interface GuestFormProps {
+  action: (guestFormSchema: GuestFormSchema) => Promise<void>
+  guest?: ListGuestDTO
+}
+
+const GuestForm: React.FC<GuestFormProps> = ({ action, guest }) => {
   const router = useRouter()
   const {
     register,
@@ -19,11 +24,12 @@ const NewGuestForm: React.FC = () => {
   } = useForm<GuestFormSchema>({
     mode: 'onSubmit',
     resolver: zodResolver(guestFormSchema),
+    defaultValues: guest,
   })
   const goBack = () => router.back()
 
   const formAction: () => void = handleSubmit(async (data: GuestFormSchema) => {
-    await createGuest(data)
+    await action(data)
     goBack()
   })
 
@@ -62,4 +68,4 @@ const NewGuestForm: React.FC = () => {
   )
 }
 
-export default NewGuestForm
+export default GuestForm
