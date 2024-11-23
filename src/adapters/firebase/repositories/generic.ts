@@ -108,4 +108,9 @@ export abstract class GenericFirebaseRepository<
     console.log(user)
     await updateDoc(docRef, { ...data, updated_at: Timestamp.now() })
   }
+
+  public async delete(id: string): Promise<void> {
+    const docRef = doc(this.col, id)
+    await updateDoc(docRef, { deleted_at: Timestamp.now() })
+  }
 }

@@ -40,4 +40,8 @@ export abstract class GenericService<
   ): Promise<void> {
     await this.adapter.update(id, updateDTO, user)
   }
+
+  public async delete(id: string): Promise<void> {
+    await this.adapter.delete(id)
+  }
 }

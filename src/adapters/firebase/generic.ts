@@ -42,4 +42,8 @@ export abstract class FirebaseGenericAdapter<
   ): Promise<void> {
     await this.repository.update(id, updateDTO, user)
   }
+
+  public async delete(id: string): Promise<void> {
+    await this.repository.delete(id)
+  }
 }

@@ -23,4 +23,6 @@ export interface GenericCrudPort<CreateDTO, ListDTO, Model extends BaseModel> {
     updateDTO: CreateDTO,
     user: AuthenticatedUserResponseDTO,
   ): Promise<void>
+
+  delete(id: string): Promise<void>
 }

@@ -18,6 +18,10 @@ export default async function Products() {
       editRecordPageDefinition={editProductDefinition}
       records={products}
       labelAttribute="name"
+      deleteAction={async (id) => {
+        'use server'
+        await productService.delete(id)
+      }}
     />
   )
 }
