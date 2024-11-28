@@ -61,16 +61,16 @@ export default function SignUpForm() {
       <div className="mb-6">
         <label
           className="mb-2 block text-sm font-bold text-gray-700"
-          htmlFor="confirm_password"
+          htmlFor="confirmPassword"
         >
           Confirmar Senha
         </label>
         <input
           className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          {...register('confirm_password')}
+          {...register('confirmPassword')}
           type="password"
-          name="confirm_password"
-          id="confirm_password"
+          name="confirmPassword"
+          id="confirmPassword"
         />
       </div>
       <div className="flex flex-row justify-around gap-2">

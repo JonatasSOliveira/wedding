@@ -12,12 +12,13 @@ export async function getProduct(productId: string): Promise<ListProductDTO> {
 
 export async function createPreference(
   product: ListProductDTO,
+  guestName: string,
 ): Promise<string> {
   const initialProjectUrl = process.env.PROJECT_URl
   const productPreference = await MercadoPagoService.getPreference().create({
     body: {
       back_urls: {
-        success: `${initialProjectUrl}/payment-return/success`,
+        success: `${initialProjectUrl}/payment-return/success?guestName=${guestName}&productId=${product.id}`,
         failure: `${initialProjectUrl}/payment-return/failure`,
       },
       items: [
@@ -25,8 +26,8 @@ export async function createPreference(
           id: product.id,
           title: product.name,
           quantity: 1,
-          unit_price: product.max_price,
-          picture_url: product.imgs_urls?.[0],
+          unit_price: product.maxPrice,
+          picture_url: product.imgsUrls?.[0],
         },
       ],
     },
