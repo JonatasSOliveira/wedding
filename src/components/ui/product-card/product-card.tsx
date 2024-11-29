@@ -4,7 +4,7 @@ import { GuestRole } from '@/domain/enums/guest-type'
 import Link from 'next/link'
 import ImgCarousel from '../img-carousel/img-carousel'
 import { currencyFormatter } from '@/utils/formatters'
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react'
 
 interface ProductCardProps {
   product: ListProductDTO
@@ -33,10 +33,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <Link
-          className="rounded bg-blue-500 px-4 py-2 text-center font-bold text-white hover:bg-blue-700 flex items-center justify-center gap-4"
+          className="flex items-center justify-center gap-4 rounded bg-blue-500 px-4 py-2 text-center font-bold text-white hover:bg-blue-700"
           href={`/payment/${product.id}`}
         >
-          <Icon icon="ant-design:gift-twotone" color='#fff' /> Presentear
+          <Icon icon="ant-design:gift-twotone" color="#fff" /> Presentear
         </Link>
       </div>
     </div>
