@@ -4,9 +4,9 @@ export const authSignUpFormSchema = z
   .object({
     email: z.string().email(),
     password: z.string().min(6),
-    confirm_password: z.string().min(6),
+    confirmPassword: z.string().min(6),
   })
-  .superRefine(({ confirm_password: confirmPassword, password }, ctx) => {
+  .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
       ctx.addIssue({
         code: 'custom',

@@ -1,7 +1,7 @@
 export interface BaseModel {
   id: string
-  user_id: string
-  created_at: string
-  updated_at: string
-  deleted_at?: string
+  userId: string
+  createdAt: string
+  updatedAt: string
+  deletedAt?: string
 }

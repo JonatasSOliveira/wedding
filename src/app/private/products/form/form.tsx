@@ -39,13 +39,13 @@ export const ProductForm: React.FC<PoductFormProps> = ({ action, product }) => {
     const newImageUrls = [...imageUrls]
     newImageUrls[index] = value
     setImageUrls(newImageUrls)
-    setValue('imgs_urls', newImageUrls)
+    setValue('imgsUrls', newImageUrls)
   }
 
   const removeImageUrl = (index: number) => {
     const newImageUrls = imageUrls.filter((_, i) => i !== index)
     setImageUrls(newImageUrls)
-    setValue('imgs_urls', newImageUrls)
+    setValue('imgsUrls', newImageUrls)
   }
 
   const formAction: () => void = handleSubmit(
@@ -66,14 +66,14 @@ export const ProductForm: React.FC<PoductFormProps> = ({ action, product }) => {
       <Input
         label="Preço Mínimo"
         type="number"
-        {...register('min_price')}
-        error={errors.min_price?.message}
+        {...register('minPrice')}
+        error={errors.minPrice?.message}
       />
       <Input
         label="Preço Máximo"
         type="number"
-        {...register('max_price')}
-        error={errors.max_price?.message}
+        {...register('maxPrice')}
+        error={errors.maxPrice?.message}
       />
       <div className="mb-4">
         <p className="text-sm font-bold text-gray-700">Disponível para:</p>
@@ -110,7 +110,7 @@ export const ProductForm: React.FC<PoductFormProps> = ({ action, product }) => {
               placeholder="URL da imagem"
               value={url}
               onChange={(e) => handleImageUrlChange(index, e.target.value)}
-              className={`rounded border p-2 ${errors.imgs_urls ? 'border-red-500' : ''}`}
+              className={`rounded border p-2 ${errors.imgsUrls ? 'border-red-500' : ''}`}
             />
             <button
               type="button"
@@ -124,9 +124,9 @@ export const ProductForm: React.FC<PoductFormProps> = ({ action, product }) => {
         <button type="button" onClick={addImageUrl} className="text-blue-500">
           Adicionar URL de Imagem
         </button>
-        {errors.imgs_urls && (
+        {errors.imgsUrls && (
           <span className="text-sm text-red-500">
-            {errors.imgs_urls.message}
+            {errors.imgsUrls.message}
           </span>
         )}
       </div>

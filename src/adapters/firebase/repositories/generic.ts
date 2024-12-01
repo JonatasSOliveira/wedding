@@ -35,14 +35,14 @@ export abstract class GenericFirebaseRepository<
       throw new Error('Document data is undefined')
     }
 
-    const { created_at, updated_at, deleted_at, ...rest } = data
+    const { createdAt, updatedAt, deletedAt, ...rest } = data
 
     return {
       ...rest,
       id: doc.id,
-      created_at: created_at?.toDate(),
-      updated_at: updated_at?.toDate(),
-      deleted_at: deleted_at?.toDate(),
+      createdAt: createdAt?.toDate(),
+      updatedAt: updatedAt?.toDate(),
+      deletedAt: deletedAt?.toDate(),
     } as ListDTO
   }
 
@@ -53,9 +53,9 @@ export abstract class GenericFirebaseRepository<
     await addDoc(this.col, {
       ...data,
       user_id: user.id,
-      created_at: Timestamp.now(),
-      updated_at: Timestamp.now(),
-      deleted_at: null,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      deletedAt: null,
     })
   }
 
@@ -63,7 +63,7 @@ export abstract class GenericFirebaseRepository<
     modelQuery?: ModelQuery<Model>,
     userId?: string,
   ): Promise<ListDTO[]> {
-    const conditions = [where('deleted_at', '==', null)]
+    const conditions = [where('deletedAt', '==', null)]
 
     if (userId) {
       conditions.push(where('user_id', '==', userId))
@@ -106,11 +106,11 @@ export abstract class GenericFirebaseRepository<
   ): Promise<void> {
     const docRef = doc(this.col, id)
     console.log(user)
-    await updateDoc(docRef, { ...data, updated_at: Timestamp.now() })
+    await updateDoc(docRef, { ...data, updatedAt: Timestamp.now() })
   }
 
   public async delete(id: string): Promise<void> {
     const docRef = doc(this.col, id)
-    await updateDoc(docRef, { deleted_at: Timestamp.now() })
+    await updateDoc(docRef, { deletedAt: Timestamp.now() })
   }
 }

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --fix"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -31,6 +31,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@iconify/react": "^5.0.2",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^20",
     "@types/react": "^18",
