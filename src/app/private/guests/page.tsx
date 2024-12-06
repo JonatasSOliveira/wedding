@@ -1,12 +1,11 @@
 import React from 'react'
 import { guestPageDefinition } from './page-definition'
-import { GuestService } from '@/application/services/guests'
-import { FirebaseGuestAdapter } from '@/adapters/firebase/guest'
 import { newGuestDefinition } from './form/page-definition'
 import { RecordListTemplate } from '@/components/templates/record-list'
 import { editGuestDefinition } from './form/[id]/page-definition'
+import { ServicesContainer } from '@/application/services'
 
-const guestService = new GuestService(new FirebaseGuestAdapter())
+const guestService = ServicesContainer.getGuestService()
 
 const ListGuestsPage: React.FC = async () => {
   const guests = await guestService.list()

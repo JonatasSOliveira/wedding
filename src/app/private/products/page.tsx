@@ -1,12 +1,11 @@
 import React from 'react'
 import { newProductDefinition } from './form/page-definition'
 import { productPageDefinition } from './page-definition'
-import { ProductService } from '@/application/services/product'
-import { FirebaseProductAdapter } from '@/adapters/firebase/product'
 import { RecordListTemplate } from '@/components/templates/record-list'
 import { editProductDefinition } from './form/[id]/page-definition'
+import { ServicesContainer } from '@/application/services'
 
-const productService = new ProductService(new FirebaseProductAdapter())
+const productService = ServicesContainer.getProductService()
 
 export default async function Products() {
   const products = await productService.list()

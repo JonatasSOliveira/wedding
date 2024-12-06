@@ -1,13 +1,11 @@
 'use server'
 
-import { FirebaseProductAdapter } from '@/adapters/firebase/product'
-import { ProductService } from '@/application/services/product'
+import { ServicesContainer } from '@/application/services'
 import { ListProductDTO } from '@/domain/dtos/product/response/list'
 import { MercadoPagoService } from '@/infra/mercado-pago'
 
 export async function getProduct(productId: string): Promise<ListProductDTO> {
-  const productService = new ProductService(new FirebaseProductAdapter())
-  return await productService.get({ id: productId })
+  return await ServicesContainer.getProductService().get({ id: productId })
 }
 
 export async function createPreference(

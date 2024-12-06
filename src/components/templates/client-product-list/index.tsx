@@ -1,5 +1,4 @@
-import { FirebaseProductAdapter } from '@/adapters/firebase/product'
-import { ProductService } from '@/application/services/product'
+import { ServicesContainer } from '@/application/services'
 import { ProductCard } from '@/components/ui/product-card/product-card'
 import { GuestRole } from '@/domain/enums/guest-type'
 import React from 'react'
@@ -9,7 +8,7 @@ interface ClientProductListTemplateProps {
   guestRole: GuestRole
 }
 
-const productService = new ProductService(new FirebaseProductAdapter())
+const productService = ServicesContainer.getProductService()
 
 export const ClientProductListTemplate: React.FC<
   ClientProductListTemplateProps

@@ -1,22 +1,24 @@
 'use server'
 
-import { FirebaseProductAdapter } from '@/adapters/firebase/product'
-import { ProductService } from '@/application/services/product'
 import { ListProductDTO } from '@/domain/dtos/product/response/list'
 import { getSession } from '@/lib/auth'
 import { ProductFormSchema } from '../form-schema'
+import { ServicesContainer } from '@/application/services'
 
 export async function getProduct(id: string): Promise<ListProductDTO> {
-  const session = await getSession()
-  const productService = new ProductService(new FirebaseProductAdapter())
-  return await productService.get({ id }, session)
+  return await ServicesContainer.getProductService().get(
+    { id },
+    await getSession(),
+  )
 }
 
 export async function updateProduct(
   id: string,
   productData: ProductFormSchema,
 ): Promise<void> {
-  const session = await getSession()
-  const productService = new ProductService(new FirebaseProductAdapter())
-  await productService.update(id, { ...productData }, session)
+  await ServicesContainer.getProductService().update(
+    id,
+    { ...productData },
+    await getSession(),
+  )
 }
