@@ -47,7 +47,7 @@ const ImgCarousel: React.FC<ImgCarouselProps> = ({ imageUrls, alt }) => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
     >
-      <div className="flex flex-1 items-center justify-center overflow-hidden rounded-lg bg-slate-300 p-1">
+      <div className="flex flex-1 items-center justify-center overflow-hidden rounded-lg bg-neutral-mediumGray p-1">
         <img
           src={imageUrls[currentImageIndex]}
           alt={alt}
@@ -59,7 +59,7 @@ const ImgCarousel: React.FC<ImgCarouselProps> = ({ imageUrls, alt }) => {
         {imageUrls.map((imageUrl, index) => (
           <span
             key={index}
-            className={`h-3 w-3 cursor-pointer rounded-full ${index === currentImageIndex ? 'bg-blue-500' : 'bg-gray-300'}`}
+            className={`h-3 w-3 cursor-pointer rounded-full ${index === currentImageIndex ? 'bg-primary-blue' : 'bg-neutral-mediumGray'}`}
             onClick={() => setCurrentImageIndex(index)}
           ></span>
         ))}

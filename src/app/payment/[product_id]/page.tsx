@@ -13,8 +13,10 @@ const PaymentPage: React.FC<PaymentPageProps> = async ({
 }) => {
   const product = await getProduct(product_id)
   return (
-    <div className="my-auto flex h-[95vh] w-[95%] flex-col items-center gap-2 overflow-auto rounded bg-white p-4">
-      <h1 className="text-2xl font-bold">{product.name}</h1>
+    <div className="flex flex-1 flex-col items-center gap-1 overflow-auto rounded bg-neutral-lightGray p-4">
+      <h1 className="text-2xl font-bold text-secondary-darkBlue">
+        {product.name}
+      </h1>
       <div className="h-[400px] w-full p-2">
         {product.imgsUrls ? (
           <ImgCarousel imageUrls={product.imgsUrls} alt={product.name} />
@@ -25,7 +27,9 @@ const PaymentPage: React.FC<PaymentPageProps> = async ({
         )}
       </div>
       {product.description ? (
-        <p className="pl-2 pr-2 text-center text-sm">{product.description}</p>
+        <p className="pl-2 pr-2 text-center text-sm text-secondary-darkBlue">
+          {product.description}
+        </p>
       ) : null}
       <span className="font-bold">
         {currencyFormatter.format(product.maxPrice)}

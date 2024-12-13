@@ -18,8 +18,10 @@ export const ClientProductListTemplate: React.FC<
   })
 
   return (
-    <div className="my-auto h-[95vh] w-[95%] overflow-y-auto rounded bg-white px-2 py-4">
-      <h1 className="text-center text-2xl font-bold">{title}</h1>
+    <div className="flex-1 overflow-y-auto rounded bg-neutral-lightGray px-2 py-4">
+      <h1 className="text-center text-2xl font-bold text-secondary-darkBlue">
+        {title}
+      </h1>
       <div className="grid grid-cols-2 gap-2">
         {products.map((product) => (
           <ProductCard
