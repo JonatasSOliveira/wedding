@@ -1,14 +1,14 @@
 'use server'
 
-import { FirebaseProductAdapter } from '@/adapters/firebase/product'
 import { ProductFormSchema } from './form-schema'
-import { ProductService } from '@/application/services/product'
 import { getSession } from '@/lib/auth'
+import { ServicesContainer } from '@/application/services'
 
 export async function createProduct(
   productData: ProductFormSchema,
 ): Promise<void> {
-  const session = await getSession()
-  const productService = new ProductService(new FirebaseProductAdapter())
-  productService.create({ ...productData }, session)
+  await ServicesContainer.getProductService().create(
+    { ...productData },
+    await getSession(),
+  )
 }

@@ -25,7 +25,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       <div className="mt-2 flex flex-col space-y-1">
-        <h2 className="line-clamp-2 text-lg font-semibold">{product.name}</h2>
+        <h2 className="line-clamp-2 text-lg font-semibold text-primary-blue">
+          {product.name}
+        </h2>
         <div className="text-sm text-gray-700">
           <span className="font-bold">
             {currencyFormatter.format(product.maxPrice)}
@@ -33,10 +35,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <Link
-          className="flex items-center justify-center gap-4 rounded bg-blue-500 px-4 py-2 text-center font-bold text-white hover:bg-blue-700"
+          className="flex items-center justify-center gap-2 rounded bg-primary-blue px-4 py-2 text-center font-bold text-white hover:bg-secondary-darkBlue"
           href={`/payment/${product.id}`}
         >
-          <Icon icon="ant-design:gift-twotone" color="#fff" /> Presentear
+          <Icon icon="ant-design:gift-twotone" className="text-white" />
+          <span className="text-sm">Presentear</span>
         </Link>
       </div>
     </div>

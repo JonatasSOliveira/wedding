@@ -19,7 +19,10 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ product }) => {
   }
 
   return (
-    <div>
+    <div className="py-2">
+      <p className="mb-2 text-center text-sm">
+        Informe o nome para liberar o pagamento
+      </p>
       <Input
         placeholder="Nome do convidado"
         value={guestName}
@@ -28,9 +31,9 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ product }) => {
       />
       <button
         type="button"
-        className="rounded bg-blue-500 px-4 py-2 text-center font-bold text-white hover:bg-blue-700"
+        className="flex w-[100%] items-center justify-center gap-2 rounded bg-primary-blue px-4 py-2 text-center font-bold text-white hover:bg-secondary-darkBlue disabled:bg-neutral-mediumGray disabled:text-neutral-lightGray"
         onClick={releasePayment}
-        disabled={Boolean(preferenceId)}
+        disabled={Boolean(preferenceId) || guestName?.length < 3}
       >
         Liberar pagamento
       </button>

@@ -1,5 +1,4 @@
-import { FirebaseProductAdapter } from '@/adapters/firebase/product'
-import { ProductService } from '@/application/services/product'
+import { ServicesContainer } from '@/application/services'
 import { ProductCard } from '@/components/ui/product-card/product-card'
 import { GuestRole } from '@/domain/enums/guest-type'
 import React from 'react'
@@ -9,7 +8,7 @@ interface ClientProductListTemplateProps {
   guestRole: GuestRole
 }
 
-const productService = new ProductService(new FirebaseProductAdapter())
+const productService = ServicesContainer.getProductService()
 
 export const ClientProductListTemplate: React.FC<
   ClientProductListTemplateProps
@@ -19,8 +18,10 @@ export const ClientProductListTemplate: React.FC<
   })
 
   return (
-    <div className="my-auto h-[95vh] w-[95%] overflow-y-auto rounded bg-white px-2 py-4">
-      <h1 className="text-center text-2xl font-bold">{title}</h1>
+    <div className="flex-1 overflow-y-auto rounded bg-neutral-lightGray px-2 py-4">
+      <h1 className="text-center text-2xl font-bold text-secondary-darkBlue">
+        {title}
+      </h1>
       <div className="grid grid-cols-2 gap-2">
         {products.map((product) => (
           <ProductCard
