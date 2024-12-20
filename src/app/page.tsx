@@ -25,8 +25,8 @@ const WelcomeBannerComponent: React.FC = () => (
   <>
     <div className="relative text-center text-white">
       <Image
-        src="/images/casal.jpeg"
-        alt="Jonatas e Milena sentados no banco"
+        src="/images/casal.jpg"
+        alt="Milena e Jonatas abraçados"
         layout="responsive"
         width={500}
         height={300}
@@ -35,11 +35,11 @@ const WelcomeBannerComponent: React.FC = () => (
       <div className="absolute inset-0 rounded-t-lg bg-black opacity-30"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
         <h1 className="text-3xl font-bold text-white drop-shadow-md">
-          Jonatas & Milena
+          Milena & Jonatas
         </h1>
-        <p className="text-lg text-white drop-shadow-md">
+        {/* <p className="text-lg text-white drop-shadow-md">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
+        </p> */}
       </div>
     </div>
   </>
