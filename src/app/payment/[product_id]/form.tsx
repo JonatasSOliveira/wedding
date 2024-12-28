@@ -2,8 +2,8 @@
 
 import Input from '@/components/ui/input/input'
 import { ListProductDTO } from '@/domain/dtos/product/response/list'
-import React, { useState } from 'react'
-import { createPreference } from './actions'
+import React, { useState, useTransition } from 'react'
+import { createPreference, createProductPayment } from './actions'
 import MercadoPagoWallet from '@/components/integrations/mercado-pago-wallet'
 
 interface PaymentFormProps {
@@ -13,9 +13,15 @@ interface PaymentFormProps {
 export const PaymentForm: React.FC<PaymentFormProps> = ({ product }) => {
   const [guestName, setGuestName] = useState('')
   const [preferenceId, setPreferenceId] = useState('')
+  const [isPending, startTransition] = useTransition()
 
   const releasePayment = async () => {
-    setPreferenceId(await createPreference(product, guestName))
+    startTransition(async () => {
+      const productPaymentId = await createProductPayment(product, guestName)
+      setPreferenceId(
+        await createPreference(product, guestName, productPaymentId),
+      )
+    })
   }
 
   return (
@@ -35,7 +41,7 @@ export const PaymentForm: React.FC<PaymentFormProps> = ({ product }) => {
         onClick={releasePayment}
         disabled={Boolean(preferenceId) || guestName?.length < 3}
       >
-        Liberar pagamento
+        {isPending ? 'Carregando...' : 'Liberar pagamento'}
       </button>
       {Boolean(preferenceId) && (
         <MercadoPagoWallet preferenceId={preferenceId} />

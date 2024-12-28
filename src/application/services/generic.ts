@@ -8,15 +8,13 @@ export abstract class GenericService<
   ListDTO,
   Model extends BaseModel,
 > {
-  constructor(
-    protected readonly adapter: GenericCrudPort<CreateDTO, ListDTO, Model>,
-  ) {}
+  constructor(protected readonly adapter: GenericCrudPort<ListDTO, Model>) {}
 
   public async create(
     createDTO: CreateDTO,
-    user: AuthenticatedUserResponseDTO,
-  ): Promise<void> {
-    await this.adapter.create(createDTO, user)
+    user?: AuthenticatedUserResponseDTO,
+  ): Promise<string> {
+    return await this.adapter.create(createDTO as Partial<Model>, user)
   }
 
   public async list(
@@ -38,7 +36,7 @@ export abstract class GenericService<
     updateDTO: CreateDTO,
     user: AuthenticatedUserResponseDTO,
   ): Promise<void> {
-    await this.adapter.update(id, updateDTO, user)
+    await this.adapter.update(id, updateDTO as Partial<Model>, user)
   }
 
   public async delete(id: string): Promise<void> {
