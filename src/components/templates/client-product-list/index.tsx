@@ -29,6 +29,11 @@ export const ClientProductListTemplate: React.FC<
       <h1 className="text-center text-2xl font-bold text-secondary-darkBlue">
         {title}
       </h1>
+      <p className="px-4 text-center text-sm text-gray-700">
+        Os itens são apenas sugestões de contribuição. Não será comprado
+        exatamente o que está aqui, é apenas uma forma divertida de ajudar o
+        casal!
+      </p>
       <div className="grid grid-cols-2 gap-2">
         {products.map((product) => (
           <ProductCard

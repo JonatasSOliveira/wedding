@@ -14,7 +14,7 @@ const PaymentPage: React.FC<PaymentPageProps> = async ({
   const product = await getProduct(product_id)
   return (
     <div className="flex flex-1 flex-col items-center gap-1 overflow-auto rounded bg-neutral-lightGray p-4">
-      <h1 className="text-2xl font-bold text-secondary-darkBlue">
+      <h1 className="text-center text-2xl font-bold text-secondary-darkBlue">
         {product.name}
       </h1>
       <div className="h-[400px] w-full p-2">

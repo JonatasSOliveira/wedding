@@ -5,6 +5,6 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  console.log('request', request)
+  console.log('[WEBHOOKS - MERCADOPAGO] Request Body', request.body)
   return Response.json({ status: 200 })
 }

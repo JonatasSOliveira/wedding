@@ -4,11 +4,14 @@ import { productPageDefinition } from './page-definition'
 import { RecordListTemplate } from '@/components/templates/record-list'
 import { editProductDefinition } from './form/[id]/page-definition'
 import { ServicesContainer } from '@/application/services'
+import { currencyFormatter } from '@/utils/formatters'
 
 const productService = ServicesContainer.getProductService()
 
 export default async function Products() {
-  const products = await productService.list()
+  const products = (await productService.list()).sort(
+    (a, b) => a.minPrice - b.minPrice,
+  )
 
   return (
     <RecordListTemplate
@@ -17,6 +20,9 @@ export default async function Products() {
       editRecordPageDefinition={editProductDefinition}
       records={products}
       labelAttribute="name"
+      getDescription={(product) =>
+        String(currencyFormatter.format(product.maxPrice))
+      }
       deleteAction={async (id) => {
         'use server'
         await productService.delete(id)
