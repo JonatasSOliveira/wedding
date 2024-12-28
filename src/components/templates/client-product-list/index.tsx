@@ -13,9 +13,16 @@ const productService = ServicesContainer.getProductService()
 export const ClientProductListTemplate: React.FC<
   ClientProductListTemplateProps
 > = async ({ guestRole, title }) => {
-  const products = await productService.list({
-    disponibility: guestRole,
-  })
+  const promises = [productService.list({ disponibility: guestRole })]
+  if (guestRole === GuestRole.GUEST) {
+    promises.push(productService.list({ disponibility: GuestRole.GROOMSMAN }))
+  }
+  const [defaultProducts, groomsmanProducts] = await Promise.all(promises)
+  const products = (
+    groomsmanProducts
+      ? defaultProducts.concat(groomsmanProducts)
+      : defaultProducts
+  ).sort((a, b) => a.minPrice - b.minPrice)
 
   return (
     <div className="flex-1 overflow-y-auto rounded bg-neutral-lightGray px-2 py-4">
