@@ -5,21 +5,7 @@ import { groomsmanProductListDefinition } from './product-lists/groomsman/page-d
 import { signInPageDefinition } from './auth/sign-in/page-definition'
 import React from 'react'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { PageDefinition } from '@/types/page-definition'
-
-interface LinkComponentProps {
-  pageDefinition: PageDefinition
-}
-
-const LinkComponent = ({ pageDefinition }: LinkComponentProps) => (
-  <Link
-    href={pageDefinition.path}
-    className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary-pink py-4 text-lg font-semibold text-secondary-darkBlue transition duration-300 hover:bg-pink-400"
-  >
-    <Icon icon="ant-design:gift-twotone" className="text-secondary-darkBlue" />
-    {pageDefinition.title}
-  </Link>
-)
+import { LinkComponent } from './link-component'
 
 const WelcomeBannerComponent: React.FC = () => (
   <>
@@ -37,9 +23,6 @@ const WelcomeBannerComponent: React.FC = () => (
         <h1 className="text-3xl font-bold text-white drop-shadow-md">
           Milena & Jonatas
         </h1>
-        {/* <p className="text-lg text-white drop-shadow-md">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p> */}
       </div>
     </div>
   </>
@@ -76,6 +59,11 @@ const GiftListComponent: React.FC = () => (
       Se desejar nos ajudar a começar nossa vida a dois, preparamos essa lista
       com muito carinho!
     </p>
+    <p className="text-sm text-gray-700">
+      Os itens são apenas sugestões de contribuição. Não será comprado
+      exatamente o que está aqui, é apenas uma forma divertida de ajudar o
+      casal!
+    </p>
     <LinkComponent pageDefinition={guestProductListDefinition} />
     <LinkComponent pageDefinition={groomsmanProductListDefinition} />
   </div>
@@ -94,12 +82,12 @@ export default function HomePage() {
           <GiftListComponent />
         </main>
       </div>
-      <footer className="py-2">
+      <footer className="flex justify-end py-2">
         <Link
           href={signInPageDefinition.path}
-          className="flex justify-center font-bold text-secondary-darkBlue"
+          className="font-bold text-secondary-darkBlue"
         >
-          Entrar
+          <Icon icon="prime:sign-in" width="24" height="24" />
         </Link>
       </footer>
     </>

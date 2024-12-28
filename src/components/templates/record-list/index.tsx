@@ -10,6 +10,7 @@ interface RecordListTemplateProps<RecordType> {
   records: RecordType[]
   labelAttribute: keyof RecordType
   deleteAction: (id: string) => Promise<void>
+  getDescription?: (record: RecordType) => string
 }
 
 export const RecordListTemplate = <RecordType extends { id: string }>({
@@ -19,6 +20,7 @@ export const RecordListTemplate = <RecordType extends { id: string }>({
   records,
   labelAttribute,
   deleteAction,
+  getDescription,
 }: RecordListTemplateProps<RecordType>): JSX.Element => {
   const handleDelete = async (id: string) => {
     'use server'
@@ -37,6 +39,7 @@ export const RecordListTemplate = <RecordType extends { id: string }>({
             <span className="mb-2 font-bold">
               {String(record[labelAttribute])}
             </span>
+            {getDescription ? <span>{getDescription(record)}</span> : null}
             <div className="flex justify-center gap-2">
               <DeleteRecordDialog
                 recordLabel={String(record[labelAttribute])}

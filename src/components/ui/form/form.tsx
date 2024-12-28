@@ -9,7 +9,7 @@ interface FormProps {
 const Form: React.FC<FormProps> = ({ children, formAction, goBack }) => (
   <form
     action={formAction}
-    className="my-auto flex h-[75vh] w-[90%] flex-col rounded bg-white px-8 pb-8 pt-6 shadow-md"
+    className="my-auto flex flex-col rounded bg-white px-8 pb-8 pt-6 shadow-md"
   >
     <div className="mb-4 h-[90%] overflow-y-auto">{children}</div>
     <div className="flex flex-row justify-around gap-2">

@@ -19,7 +19,7 @@ const PageLink: React.FC<PageLinkProps> = ({ pageDefinition }) => (
 )
 
 const HomePage: React.FC = () => (
-  <div className="my-auto flex h-[90vh] w-[90%] flex-col gap-2 rounded bg-white p-4">
+  <div className="flex flex-1 flex-col gap-2 rounded bg-white px-2 py-4">
     <h1 className="mb-2 text-center text-xl font-bold">
       {homePageDefinition.title}
     </h1>
