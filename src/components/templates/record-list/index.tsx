@@ -26,7 +26,7 @@ export const RecordListTemplate = <RecordType extends { id: string }>({
   }
 
   return (
-    <div className="my-auto flex h-[90vh] w-[90%] flex-col rounded bg-white p-4">
+    <div className="flex flex-1 flex-col rounded bg-white px-2 py-4">
       <h1 className="mb-2 text-center text-xl font-bold">{title}</h1>
       <div className="flex flex-1 flex-col gap-2 overflow-y-auto">
         {records.map((record) => (
