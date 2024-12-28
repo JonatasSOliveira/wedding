@@ -72,7 +72,7 @@ const GiftListComponent: React.FC = () => (
 export default function HomePage() {
   return (
     <>
-      <div className="rounded-lg bg-neutral-lightGray">
+      <div className="flex flex-col items-center rounded-lg">
         <header className="relative w-full max-w-md bg-blue-300">
           <WelcomeBannerComponent />
         </header>
@@ -81,15 +81,15 @@ export default function HomePage() {
           <LocationComponent />
           <GiftListComponent />
         </main>
+        <footer className="pt-2">
+          <Link
+            href={signInPageDefinition.path}
+            className="font-bold text-secondary-darkBlue"
+          >
+            <Icon icon="prime:sign-in" width="24" height="24" />
+          </Link>
+        </footer>
       </div>
-      <footer className="flex justify-end py-2">
-        <Link
-          href={signInPageDefinition.path}
-          className="font-bold text-secondary-darkBlue"
-        >
-          <Icon icon="prime:sign-in" width="24" height="24" />
-        </Link>
-      </footer>
     </>
   )
 }

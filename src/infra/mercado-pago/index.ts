@@ -20,24 +20,24 @@ export class MercadoPagoClientService {
   }
 }
 
-export class MercadoPagoService {
+export class MercadoPagoBackendContainer {
   private static client: MercadoPagoConfig
   private static preference: Preference
 
   public static getClient(): MercadoPagoConfig {
-    if (!MercadoPagoService.client) {
+    if (!MercadoPagoBackendContainer.client) {
       this.client = new MercadoPagoConfig({
         accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN || '',
         options: { timeout: 5000, idempotencyKey: 'abc' },
       })
     }
-    return MercadoPagoService.client
+    return MercadoPagoBackendContainer.client
   }
 
   public static getPreference(): Preference {
-    if (!MercadoPagoService.preference) {
-      this.preference = new Preference(MercadoPagoService.getClient())
+    if (!MercadoPagoBackendContainer.preference) {
+      this.preference = new Preference(MercadoPagoBackendContainer.getClient())
     }
-    return MercadoPagoService.preference
+    return MercadoPagoBackendContainer.preference
   }
 }

@@ -4,21 +4,18 @@ import { AuthenticatedUserResponseDTO } from '@/domain/dtos/auth/response/authen
 import { ModelQuery } from '@/domain/model-querying'
 import { GenericCrudPort } from '@/domain/ports/generic-crud'
 
-export abstract class FirebaseGenericAdapter<
-  CreateDTO,
-  ListDTO,
-  Model extends BaseModel,
-> implements GenericCrudPort<CreateDTO, ListDTO, Model>
+export abstract class FirebaseGenericAdapter<ListDTO, Model extends BaseModel>
+  implements GenericCrudPort<ListDTO, Model>
 {
   constructor(
-    protected repository: GenericFirebaseRepository<CreateDTO, ListDTO, Model>,
+    protected repository: GenericFirebaseRepository<ListDTO, Model>,
   ) {}
 
   public async create(
-    createDTO: CreateDTO,
+    createDTO: Partial<Model>,
     user: AuthenticatedUserResponseDTO,
-  ): Promise<void> {
-    await this.repository.create(createDTO, user)
+  ): Promise<string> {
+    return await this.repository.create(createDTO, user)
   }
 
   public async list(
@@ -37,10 +34,10 @@ export abstract class FirebaseGenericAdapter<
 
   public async update(
     id: string,
-    updateDTO: CreateDTO,
+    updateDTO: Partial<Model>,
     user: AuthenticatedUserResponseDTO,
   ): Promise<void> {
-    await this.repository.update(id, updateDTO, user)
+    await this.repository.update(id, updateDTO as Partial<Model>, user)
   }
 
   public async delete(id: string): Promise<void> {

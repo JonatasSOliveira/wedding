@@ -2,6 +2,7 @@ import {
   CollectionReference,
   DocumentSnapshot,
   Timestamp,
+  WithFieldValue,
   addDoc,
   collection,
   doc,
@@ -18,7 +19,6 @@ import { ModelQuery } from '@/domain/model-querying'
 import { BaseModel } from '@/domain/models/base'
 
 export abstract class GenericFirebaseRepository<
-  CreateDTO,
   ListDTO,
   Model extends BaseModel,
 > {
@@ -47,16 +47,22 @@ export abstract class GenericFirebaseRepository<
   }
 
   public async create(
-    data: CreateDTO,
-    user: AuthenticatedUserResponseDTO,
-  ): Promise<void> {
-    await addDoc(this.col, {
+    data: Partial<Model>,
+    user?: AuthenticatedUserResponseDTO,
+  ): Promise<string> {
+    const formatedData: WithFieldValue<Partial<Model>> = {
       ...data,
-      user_id: user.id,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now(),
       deletedAt: null,
-    })
+    }
+
+    if (user) {
+      formatedData.userId = user.id
+    }
+
+    const docRef = await addDoc(this.col, formatedData)
+    return docRef.id
   }
 
   public async list(
@@ -101,8 +107,8 @@ export abstract class GenericFirebaseRepository<
 
   public async update(
     id: string,
-    data: CreateDTO,
-    user: AuthenticatedUserResponseDTO,
+    data: Partial<Model>,
+    user?: AuthenticatedUserResponseDTO,
   ): Promise<void> {
     const docRef = doc(this.col, id)
     console.log(user)

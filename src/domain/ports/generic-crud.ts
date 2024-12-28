@@ -2,11 +2,11 @@ import { AuthenticatedUserResponseDTO } from '../dtos/auth/response/authenticate
 import { ModelQuery } from '../model-querying'
 import { BaseModel } from '../models/base'
 
-export interface GenericCrudPort<CreateDTO, ListDTO, Model extends BaseModel> {
+export interface GenericCrudPort<ListDTO, Model extends BaseModel> {
   create(
-    createDTO: CreateDTO,
-    user: AuthenticatedUserResponseDTO,
-  ): Promise<void>
+    createDTO: Partial<Model>,
+    user?: AuthenticatedUserResponseDTO,
+  ): Promise<string>
 
   list(
     query?: ModelQuery<Model>,
@@ -20,8 +20,8 @@ export interface GenericCrudPort<CreateDTO, ListDTO, Model extends BaseModel> {
 
   update(
     id: string,
-    updateDTO: CreateDTO,
-    user: AuthenticatedUserResponseDTO,
+    updateDTO: Partial<Model>,
+    user?: AuthenticatedUserResponseDTO,
   ): Promise<void>
 
   delete(id: string): Promise<void>
