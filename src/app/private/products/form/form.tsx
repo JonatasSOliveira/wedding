@@ -1,7 +1,7 @@
 'use client'
 
 import { ProductFormSchema, productFormSchema } from './form-schema'
-import React, { useState } from 'react'
+import React, { useState, useTransition } from 'react'
 import Input from '@/components/ui/input/input'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
@@ -16,6 +16,7 @@ interface PoductFormProps {
 }
 
 export const ProductForm: React.FC<PoductFormProps> = ({ action, product }) => {
+  const [isSaving, startSaving] = useTransition()
   const router = useRouter()
   const {
     register,
@@ -48,15 +49,15 @@ export const ProductForm: React.FC<PoductFormProps> = ({ action, product }) => {
     setValue('imgsUrls', newImageUrls)
   }
 
-  const formAction: () => void = handleSubmit(
-    async (data: ProductFormSchema) => {
+  const formAction: () => void = handleSubmit(async (data: ProductFormSchema) =>
+    startSaving(async () => {
       await action(data)
       goBack()
-    },
+    }),
   )
 
   return (
-    <Form formAction={formAction} goBack={goBack}>
+    <Form formAction={formAction} goBack={goBack} isSaving={isSaving}>
       <Input label="Nome" {...register('name')} error={errors.name?.message} />
       <Input
         label="Descrição"

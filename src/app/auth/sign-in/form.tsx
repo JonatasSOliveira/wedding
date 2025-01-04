@@ -2,14 +2,16 @@
 
 import { AuthSignUpFormData, authSignUpFormSchema } from './form-schema'
 
-import React from 'react'
+import React, { useTransition } from 'react'
 import { homePageDefinition } from '@/app/private/home/page-definition'
 import { signIn } from './actions'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 export default function SignInForm() {
+  const [isAuthenticating, startAuthentication] = useTransition()
   const router = useRouter()
   const { register, handleSubmit } = useForm<AuthSignUpFormData>({
     mode: 'onSubmit',
@@ -19,10 +21,11 @@ export default function SignInForm() {
   const goBack = () => router.back()
 
   const formAction: () => void = handleSubmit(
-    async (data: AuthSignUpFormData) => {
-      await signIn(data)
-      router.push(homePageDefinition.path)
-    },
+    async (data: AuthSignUpFormData) =>
+      startAuthentication(async () => {
+        await signIn(data)
+        router.push(homePageDefinition.path)
+      }),
   )
 
   return (
@@ -68,8 +71,18 @@ export default function SignInForm() {
         <button
           className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
           type="submit"
+          disabled={isAuthenticating}
         >
-          Logar
+          {isAuthenticating ? (
+            <Icon
+              icon="line-md:loading-loop"
+              width="24"
+              height="24"
+              className="text-white"
+            />
+          ) : (
+            'Entrar'
+          )}
         </button>
       </div>
     </form>
