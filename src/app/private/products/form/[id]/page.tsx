@@ -4,12 +4,11 @@ import { ProductForm } from '../form'
 import { ProductFormSchema } from '../form-schema'
 
 interface EditProductPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-const EditProductPage: React.FC<EditProductPageProps> = async ({
-  params: { id },
-}) => {
+const EditProductPage: React.FC<EditProductPageProps> = async ({ params }) => {
+  const { id } = await params
   const product = await getProduct(id)
 
   const handleAction = async (productData: ProductFormSchema) => {
